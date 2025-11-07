@@ -1,0 +1,38 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: oelfarsa <oelfarsa@student.1337.ma>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/11/03 11:22:42 by oelfarsa          #+#    #+#              #
+#    Updated: 2025/11/07 21:04:00 by oelfarsa         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME = libftprintf.a
+HEADER = libftprintf.h
+CC = cc
+AR = ar
+RCS = rcs
+CFLAGS = -Wall -Wextra -Werror
+
+SRCS = ft_printf.c ft_string.c ft_digit.c
+
+OBJS = $(SRCS:%.c=%.o)
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(AR) $(RCS) $(NAME) $(OBJS)
+
+%.o: %.c $(HEADER)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -f $(OBJS)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
