@@ -6,11 +6,11 @@
 /*   By: oelfarsa <oelfarsa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 11:33:08 by oelfarsa          #+#    #+#             */
-/*   Updated: 2025/11/09 12:35:23 by oelfarsa         ###   ########.fr       */
+/*   Updated: 2025/11/09 22:14:57 by oelfarsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ft_format(va_list list, const char *format, int counter, int i)
 {
@@ -46,17 +46,17 @@ int	ft_printf(const char *format, ...)
 	i = 0;
 	while (format[i])
 	{
-		if (format[i] == '%')
+		if (format[i] == '%' && !format[i + 1])
+			return (-1);
+		else if (format[i] == '%' && format[i + 1])
 		{
-			counter += ft_format(list, format, counter, i);
+			counter = ft_format(list, format, counter, i);
 			i++;
 		}
 		else
 			counter += ft_char(format[i]);
 		i++;
 	}
-	if (counter < 0)
-		return (-1);
 	va_end(list);
 	return (counter);
 }

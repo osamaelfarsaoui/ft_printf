@@ -10,11 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ft_char(char c)
 {
-	return (write(1, &c, 1));
+	write(1, &c, 1);
+	return (1);
 }
 
 int	ft_putstr(const char *str)
@@ -26,15 +27,12 @@ int	ft_putstr(const char *str)
 	if (!str)
 	{
 		counter += ft_putstr("(null)");
-		if (counter < 0)
-			return (-1);
 		return (counter);
 	}
 	i = 0;
 	while (str[i])
 	{
-		if (ft_char(str[i]) == -1)
-			return (-1);
+		ft_char(str[i]);
 		counter++;
 		i++;
 	}

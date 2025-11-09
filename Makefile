@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME = libftprintf.a
-HEADER = libftprintf.h
+HEADER = ft_printf.h
 CC = cc
 AR = ar
 RCS = rcs

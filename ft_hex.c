@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ft_pointer(unsigned long n)
 {
@@ -19,6 +19,11 @@ int	ft_pointer(unsigned long n)
 
 	counter = 0;
 	hex = "0123456789abcdef";
+	if (!n)
+	{
+		counter += ft_putstr("(nil)");
+		return (counter);
+	}
 	if (n > 15)
 		counter += ft_pointer(n / 16);
 	if (n < 16)
