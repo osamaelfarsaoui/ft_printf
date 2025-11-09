@@ -6,7 +6,7 @@
 #    By: oelfarsa <oelfarsa@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/03 11:22:42 by oelfarsa          #+#    #+#              #
-#    Updated: 2025/11/07 21:04:00 by oelfarsa         ###   ########.fr        #
+#    Updated: 2025/11/08 14:30:36 by oelfarsa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ AR = ar
 RCS = rcs
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = ft_printf.c ft_string.c ft_digit.c
+SRCS = ft_printf.c ft_string.c ft_digit.c ft_hex.c
 
 OBJS = $(SRCS:%.c=%.o)
 

@@ -6,19 +6,40 @@
 /*   By: oelfarsa <oelfarsa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 11:33:08 by oelfarsa          #+#    #+#             */
-/*   Updated: 2025/11/07 20:59:17 by oelfarsa         ###   ########.fr       */
+/*   Updated: 2025/11/09 12:35:23 by oelfarsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int ft_printf(const char *format, ...)
+int	ft_format(va_list list, const char *format, int counter, int i)
 {
-	int i;
-	int	counter;
+	if (format[i + 1] == 'd' || format[i + 1] == 'i')
+		counter += ft_number(va_arg(list, int));
+	else if (format[i + 1] == 's')
+		counter += ft_putstr(va_arg(list, char *));
+	else if (format[i + 1] == 'c')
+		counter += ft_char(va_arg(list, int));
+	else if (format[i + 1] == 'u')
+		counter += ft_unsigned(va_arg(list, unsigned int));
+	else if (format[i + 1] == 'p')
+		counter += ft_pointer(va_arg(list, unsigned long));
+	else if (format[i + 1] == 'x')
+		counter += ft_hex_lower(va_arg(list, unsigned int));
+	else if (format[i + 1] == 'X')
+		counter += ft_hex_upper(va_arg(list, unsigned int));
+	else if (format[i + 1] == '%')
+		counter += ft_char('%');
+	return (counter);
+}
+
+int	ft_printf(const char *format, ...)
+{
+	int		i;
+	int		counter;
 	va_list	list;
 
-	if (!format)
+	if (!format || write(1, "", 0) < 0)
 		return (-1);
 	va_start(list, format);
 	counter = 0;
@@ -27,24 +48,15 @@ int ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			if (format[i + 1] == 'd')
-				counter += ft_number(va_arg(list, int));
-			else if (format[i + 1] == 's')
-				counter += ft_putstr(va_arg(list, char *));
-			else if (format[i + 1] == 'c')
-				counter += ft_char(va_arg(list, int));
-			else if (format[i + 1] == 'u')
-				counter += ft_unsigned(va_arg(list, unsigned int));
-			else if (format[i + 1] == 'p')
-				counter += ft_pointer(va_arg(list, unsigned long));
-			else if (format[i + 1] == '%')
-				counter += ft_char('%');
+			counter += ft_format(list, format, counter, i);
 			i++;
 		}
 		else
 			counter += ft_char(format[i]);
 		i++;
 	}
+	if (counter < 0)
+		return (-1);
 	va_end(list);
 	return (counter);
 }
