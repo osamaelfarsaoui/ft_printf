@@ -6,7 +6,7 @@
 /*   By: oelfarsa <oelfarsa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 14:32:25 by oelfarsa          #+#    #+#             */
-/*   Updated: 2025/11/09 12:48:10 by oelfarsa         ###   ########.fr       */
+/*   Updated: 2025/11/10 11:43:19 by oelfarsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int	ft_char(char c)
 {
-	write(1, &c, 1);
-	return (1);
+	return (write(1, &c, 1), 1);
 }
 
 int	ft_putstr(const char *str)
@@ -25,15 +24,11 @@ int	ft_putstr(const char *str)
 
 	counter = 0;
 	if (!str)
-	{
-		counter += ft_putstr("(null)");
-		return (counter);
-	}
+		return (counter += ft_putstr("(null)"), counter);
 	i = 0;
 	while (str[i])
 	{
-		ft_char(str[i]);
-		counter++;
+		counter += ft_char(str[i]);
 		i++;
 	}
 	return (counter);

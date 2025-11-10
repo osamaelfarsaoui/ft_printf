@@ -6,7 +6,7 @@
 /*   By: oelfarsa <oelfarsa@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 14:29:40 by oelfarsa          #+#    #+#             */
-/*   Updated: 2025/11/09 12:33:17 by oelfarsa         ###   ########.fr       */
+/*   Updated: 2025/11/10 11:36:43 by oelfarsa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ int	ft_pointer(unsigned long n)
 	counter = 0;
 	hex = "0123456789abcdef";
 	if (!n)
-	{
-		counter += ft_putstr("(nil)");
-		return (counter);
-	}
+		return (counter += ft_putstr("(nil)"), counter);
 	if (n > 15)
 		counter += ft_pointer(n / 16);
 	if (n < 16)
